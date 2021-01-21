@@ -1,0 +1,65 @@
+{
+  "headers": [
+    {
+        "text": "",
+        "align": "start",
+        "sortable": false,
+        "value": "actividad"
+    },
+    { "text": "Horas tarea", "value": "horasTarea" },
+    { "text": "Costo mes ingeniero", "value": "costoMesIngeniero" },
+    { "text": "Valor mes ingeniero", "value": "valorMesIngeniero" },
+    { "text": "Valor Tarea", "value": "valorTarea" },
+    { "text": "Valor hora ingeniero", "value": "valorHoraIngeniero" }
+  ],
+  "desserts": [
+      {
+          "actividad": "Administración",
+          "horasTarea": 2,
+          "costoMesIngeniero": 6000000.00,
+          "valorMesIngeniero": 15000000.00,
+          "valorTarea": 187500.00,
+          "valorHoraIngeniero": 93750.00
+      },
+      {
+          "actividad": "Diseño",
+          "horasTarea": 2,
+          "costoMesIngeniero": 6000000.00,
+          "valorMesIngeniero": 15000000.00,
+          "valorTarea": 187500.00,
+          "valorHoraIngeniero": 93750.00
+      },
+      {
+          "actividad": "Desarrollo",
+          "horasTarea": 2,
+          "costoMesIngeniero": 6000000.00,
+          "valorMesIngeniero": 15000000.00,
+          "valorTarea": 187500.00,
+          "valorHoraIngeniero": 93750.00
+      },
+      {
+          "actividad": "Pruebas",
+          "horasTarea": 2,
+          "costoMesIngeniero": 6000000.00,
+          "valorMesIngeniero": 15000000.00,
+          "valorTarea": 187500.00,
+          "valorHoraIngeniero": 93750.00
+      },
+      {
+          "actividad": "Instalación",
+          "horasTarea": 2,
+          "costoMesIngeniero": 6000000.00,
+          "valorMesIngeniero": 15000000.00,
+          "valorTarea": 187500.00,
+          "valorHoraIngeniero": 93750.00
+      },
+      {
+          "actividad": "Documentación",
+          "horasTarea": 2,
+          "costoMesIngeniero": 6000000.00,
+          "valorMesIngeniero": 15000000.00,
+          "valorTarea": 187500.00,
+          "valorHoraIngeniero": 93750.00
+      }
+  ]
+}
