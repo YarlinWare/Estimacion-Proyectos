@@ -28,7 +28,7 @@
                             :key="`${d}-${i}`"
                             :class="[{'tableKey': j==0}, 'dateTable-items']"
                         >
-                            <span v-html="d"/>
+                            <span><b v-if="j>1">$</b> {{d}} </span>
                         </th>
                         <th>
                             <div class="dataTable-btn-action">
@@ -46,10 +46,10 @@
                     <tr>
                         <th class="tableKey dateTable-items">Total</th>
                         <th class="dateTable-items"><span>{{totalTabla[0]}}</span></th>
-                        <th class="dateTable-items"><span>{{totalTabla[1]}}</span></th>
-                        <th class="dateTable-items"><span>{{totalTabla[2]}}</span></th>
-                        <th class="dateTable-items"><span>{{totalTabla[3]}}</span></th>
-                        <th class="dateTable-items"><span>{{totalTabla[4]}}</span></th>
+                        <th class="dateTable-items"><span>$ {{totalTabla[1]}}</span></th>
+                        <th class="dateTable-items"><span>$ {{totalTabla[2]}}</span></th>
+                        <th class="dateTable-items"><span>$ {{totalTabla[3]}}</span></th>
+                        <th class="dateTable-items"><span>$ {{totalTabla[4]}}</span></th>
                         <th class="dateTable-items"></th>
                     </tr>
                 </tbody>

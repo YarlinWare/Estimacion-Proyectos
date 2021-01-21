@@ -26,35 +26,35 @@
                     </div>
                     <div class="form-group col-6">
                         <label for="horasTarea">Horas Tarea</label>
-                        <input type="text"
+                        <input type="number"
                             v-model="horasTarea"
                             class="form-control" id="horasTarea"
                             />
                     </div>
                     <div class="form-group col-6">
                         <label for="costoMesIngeniero">Costo mes ingeniero</label>
-                        <input type="text"
+                        <input type="number"
                             v-model="costoMesIngeniero"
                             class="form-control" id="costoMesIngeniero"
                             />
                     </div>
                     <div class="form-group col-6">
                         <label for="valorMesIngeniero">Valor mes ingeniero</label>
-                        <input type="text"
+                        <input type="number"
                             v-model="valorMesIngeniero"
                             class="form-control" id="valorMesIngeniero"
                             />
                     </div>
                     <div class="form-group col-6">
                         <label for="valorTarea">Valor Tarea</label>
-                        <input type="text"
+                        <input type="number"
                             v-model="valorTarea"
                             class="form-control" id="valorTarea"
                             />
                     </div>
                     <div class="form-group col-6">
                         <label for="valorHoraIngeniero">Valor hora ingeniero</label>
-                        <input type="text"
+                        <input type="number"
                             v-model="valorHoraIngeniero"
                             class="form-control" id="valorHoraIngeniero"
                             />
@@ -91,12 +91,12 @@ export default {
     methods:{
         guardarCambios(){
             this.objeto = {
-                    actividad: this.actividad,
-                    horasTarea: this.horasTarea,
-                    costoMesIngeniero: this.costoMesIngeniero,
-                    valorMesIngeniero: this.valorMesIngeniero,
-                    valorTarea: this.valorTarea,
-                    valorHoraIngeniero: this.valorHoraIngeniero,
+                    actividad: Number(this.actividad),
+                    horasTarea: Number(this.horasTarea),
+                    costoMesIngeniero: Number(this.costoMesIngeniero),
+                    valorMesIngeniero: Number(this.valorMesIngeniero),
+                    valorTarea: Number(this.valorTarea),
+                    valorHoraIngeniero: Number(this.valorHoraIngeniero),
             }
             // alert(JSON.stringify(this.objeto))
             this.$emit('agregar', this.objeto)
