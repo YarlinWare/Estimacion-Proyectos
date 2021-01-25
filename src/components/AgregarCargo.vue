@@ -1,16 +1,16 @@
 <template>
     <div>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Agregar
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarModal">
+            Agregar Cargo
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar un nuevo campo</h5>
+                <h5 class="modal-title" id="agregarModalLabel">Agregar un nuevo campo</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -103,9 +103,9 @@ export default {
         }
     },
     created(){
-        if (this.elemento.length != 0) {
-            this.objeto = this.elemento
-        }
+        // if (this.elemento.length != 0) {
+        //     this.objeto = this.elemento
+        // }
     }
 }
 </script>

@@ -1,9 +1,8 @@
 <template>
     <div class="container">
-        
         <div>
             <div>
-                <dialog-app @agregar="agregarCargo($event)"/>
+                <agregar-cargo-app @agregar="agregarCargo($event)"/>
             </div>
         </div>
         <div class="row">
@@ -32,10 +31,15 @@
                         </th>
                         <th>
                             <div class="dataTable-btn-action">
-                                <button class="dataTable-icons btn btn-outline-success"
+                                <!-- <button class="dataTable-icons btn btn-outline-success"
                                         @click="editarElemento(idx)"
                                         type="button"
-                                ><i class="fa fa-pencil"></i></button>
+                                ><i class="fa fa-pencil"></i></button> -->
+
+                                <editar-cargo-app   :elemento="desserts[idx]"
+                                                    @editar="editarCargo(idx, $event)"
+                                />
+
                                 <button class="dataTable-icons btn btn-outline-danger"
                                         @click="eliminarElemento(idx)"
                                         type="button"
@@ -56,23 +60,17 @@
                 </table>
             </div>
         </div>
-        <!-- <dialog-app/> -->
-        <!-- MODAL -->
-        <!-- <modal-app v-model="modal">
-            <template slot="modaltittle">
-                <h2>Prueba</h2>
-            </template>
-            <template slot="modalcontent">
-            </template>
-        </modal-app> -->
     </div>
 </template>
 <script>
 /* eslint-disable */
-import Dialog from './Dialog'
+import Agregar from './AgregarCargo'
+import Editar from './EditarCargo'
+
 export default {
     components:{
-        'dialog-app': Dialog,
+        'agregar-cargo-app': Agregar,
+        'editar-cargo-app':Editar,
     },
     data () {
         return {
@@ -91,74 +89,64 @@ export default {
                 { text: 'Valor Tarea', value: 'valorTarea' },
                 { text: 'Valor hora ingeniero', value: 'valorHoraIngeniero' },
             ],
-            desserts: [
-                {
-                    actividad: 'Administración',
-                    horasTarea: 2,
-                    costoMesIngeniero: 6000000.00,
-                    valorMesIngeniero: 15000000.00,
-                    valorTarea: 187500.00,
-                    valorHoraIngeniero: 93750.00,
-                },
-                {
-                    actividad: 'Diseño',
-                    horasTarea: 2,
-                    costoMesIngeniero: 6000000.00,
-                    valorMesIngeniero: 15000000.00,
-                    valorTarea: 187500.00,
-                    valorHoraIngeniero: 93750.00,
-                },
-                {
-                    actividad: 'Desarrollo',
-                    horasTarea: 2,
-                    costoMesIngeniero: 6000000.00,
-                    valorMesIngeniero: 15000000.00,
-                    valorTarea: 187500.00,
-                    valorHoraIngeniero: 93750.00,
-                },
-                {
-                    actividad: 'Pruebas',
-                    horasTarea: 2,
-                    costoMesIngeniero: 6000000.00,
-                    valorMesIngeniero: 15000000.00,
-                    valorTarea: 187500.00,
-                    valorHoraIngeniero: 93750.00,
-                },
-                {
-                    actividad: 'Instalación',
-                    horasTarea: 2,
-                    costoMesIngeniero: 6000000.00,
-                    valorMesIngeniero: 15000000.00,
-                    valorTarea: 187500.00,
-                    valorHoraIngeniero: 93750.00,
-                },
-                {
-                    actividad: 'Documentación',
-                    horasTarea: 2,
-                    costoMesIngeniero: 6000000.00,
-                    valorMesIngeniero: 15000000.00,
-                    valorTarea: 187500.00,
-                    valorHoraIngeniero: 93750.00,
-                },
-            ],
+            // desserts: [
+            //     {
+            //         actividad: 'Administración',
+            //         horasTarea: 2,
+            //         costoMesIngeniero: 6000000.00,
+            //         valorMesIngeniero: 15000000.00,
+            //         valorTarea: 187500.00,
+            //         valorHoraIngeniero: 93750.00,
+            //     },
+            //     {
+            //         actividad: 'Diseño',
+            //         horasTarea: 2,
+            //         costoMesIngeniero: 6000000.00,
+            //         valorMesIngeniero: 15000000.00,
+            //         valorTarea: 187500.00,
+            //         valorHoraIngeniero: 93750.00,
+            //     },
+            //     {
+            //         actividad: 'Desarrollo',
+            //         horasTarea: 2,
+            //         costoMesIngeniero: 6000000.00,
+            //         valorMesIngeniero: 15000000.00,
+            //         valorTarea: 187500.00,
+            //         valorHoraIngeniero: 93750.00,
+            //     },
+            //     {
+            //         actividad: 'Pruebas',
+            //         horasTarea: 2,
+            //         costoMesIngeniero: 6000000.00,
+            //         valorMesIngeniero: 15000000.00,
+            //         valorTarea: 187500.00,
+            //         valorHoraIngeniero: 93750.00,
+            //     },
+            //     {
+            //         actividad: 'Instalación',
+            //         horasTarea: 2,
+            //         costoMesIngeniero: 6000000.00,
+            //         valorMesIngeniero: 15000000.00,
+            //         valorTarea: 187500.00,
+            //         valorHoraIngeniero: 93750.00,
+            //     },
+            //     {
+            //         actividad: 'Documentación',
+            //         horasTarea: 2,
+            //         costoMesIngeniero: 6000000.00,
+            //         valorMesIngeniero: 15000000.00,
+            //         valorTarea: 187500.00,
+            //         valorHoraIngeniero: 93750.00,
+            //     },
+            // ],
+            desserts:{},
             elemento:{},
             totalTabla:Array(5).fill(0)
         }
     },
     methods:{
         agregarCargo(objeto){
-            // this.desserts.push(
-            //     {
-            //         actividad: this.nuevoCargo,
-            //         horasTarea: 2,
-            //         costoMesIngeniero: 6000000.00,
-            //         valorMesIngeniero: 15000000.00,
-            //         valorTarea: 187500.00,
-            //         valorHoraIngeniero: 93750.00,
-            //     }
-            // )
-            this.elemento = {}
-            this.desserts.push(objeto)
+            this.$store.commit('addDesserts',objeto)
             this.validarTotalTabla()
         },
         eliminarElemento(id){
@@ -166,12 +154,15 @@ export default {
             this.desserts.splice(id,1)
             this.validarTotalTabla()
         },
-        editarElemento(idx){
-            this.elemento = this.desserts[idx]
+        editarElemento(idx, objeto){
+            // this.elemento = this.desserts[idx]
+            this.$store.commit('editDesserts', idx, objeto)
+            this.desserts[idx] = objeto
         },
         validarTotalTabla(){
             this.totalTabla= Array(5).fill(0)
-            console.log(JSON.stringify(this.desserts))
+            this.desserts = this.$store.state.desserts
+            // alert(JSON.stringify(this.desserts))
             this.desserts.map((el, idx) =>{
                 // Horas tarea
                 this.$set(this.totalTabla, 0, this.totalTabla[0]+el.horasTarea)

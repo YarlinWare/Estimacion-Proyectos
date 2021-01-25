@@ -1,69 +1,79 @@
 <template>
     <div>
         <div class="grey lighten-5 mb-6" >
-            <div class="container">
-                <div class="row">
+            <div class="container ">
+                <div class="row ">
                     <div class="form-group col-sm-3 col-6">
                         <label for="Baja">Baja</label>
                         <input type="number"
-                            v-model="baja"
+                            v-model="parametros.baja"
                             class="form-control" id="Baja"
                             />
                     </div>
                     <div class="form-group col-sm-3 col-6">
                         <label for="Media">Media</label>
                         <input type="number"
-                            v-model="media"
+                            v-model="parametros.media"
                             class="form-control" id="Media"
                             />
                     </div>
                     <div class="form-group col-sm-3 col-6">
                         <label for="Alta">Alta</label>
                         <input type="number"
-                            v-model="alta"
+                            v-model="parametros.alta"
                             class="form-control" id="Alta"
                             />
                     </div>
                     <div class="form-group col-sm-3 col-6">
                         <label for="muyAlta">Muy Alta</label>
                         <input type="number"
-                            v-model="muyAlta"
+                            v-model="parametros.muyAlta"
                             class="form-control" id="muyAlta"
                             />
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-sm-4 col-6">
+                    <div class="form-group col-sm-5 col-6">
                         <label for="factorNomina">Factor nomina</label>
                         <input type="number" step="0.01"
-                            v-model="factorNomina"
+                            v-model="parametros.factorNomina"
                             class="form-control" id="factorNomina"
                             />
                     </div>
-                    <div class="form-group col-sm-4 col-6">
+                    <div class="form-group col-sm-5 col-6">
                         <label for="totalHorasTarea">Total horas tarea</label>
                         <input type="number"
-                            v-model="totalHorasTarea"
+                            v-model="parametros.totalHorasTarea"
                             label="Total horas tarea"
                             class="form-control" id="totalHorasTarea"
                             />
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group  col-sm-4 col-6">
+                    <div class="form-group  col-sm-5 col-6">
                         <label for="horasDiariasXDesarrollador">Horas diarias por desarrollador</label>
                         <input type="number"
-                            v-model="horasDiariasXDesarrollador"
+                            v-model="parametros.horasDiariasXDesarrollador"
                             label="Horas diarias por desarrollador"
                             class="form-control" id="horasDiariasXDesarrollador"
                             />
                     </div>
-                    <div class="form-group  col-sm-4 col-6">
+                    <div class="form-group  col-sm-5 col-6">
                         <label for="diasHabilesXMes">Días hábiles por mes</label>
                         <input type="number"
-                            v-model="diasHabilesXMes"
+                            v-model="parametros.diasHabilesXMes"
                             class="form-control" id="diasHabilesXMes"
                             />
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="form-group col-sm-4 col-6">
+                        <button type="button"
+                                class="btn btn-success"
+                                @click="guardarDatos()"
+                        >
+                            Guardar parámetros
+                        </button>
                     </div>
                 </div>
             </div>
@@ -79,35 +89,29 @@ export default {
             'center',
             'end',
         ],
-        baja:null,
-        media:null,
-        alta:null,
-        muyAlta:null,
+        parametros:{
+            baja:null,
+            media:null,
+            alta:null,
+            muyAlta:null,
 
-        factorNomina:null,
-        totalHorasTarea:null,
+            factorNomina:null,
+            totalHorasTarea:null,
 
-        horasDiariasXDesarrollador:null,
-        diasHabilesXMes:null,
+            horasDiariasXDesarrollador:null,
+            diasHabilesXMes:null
+        }
 
     }),
     methods:{
-        llenadoBloque1(){
-            const { baja, media, alta, muyAlta } = this.$store.state.horaTipoTarea
-            this.baja = baja
-            this.media = media
-            this.alta = alta
-            this.muyAlta = muyAlta
-
-            this.factorNomina= this.$store.state.factorNomina
-            this.totalHorasTarea= this.$store.state.totalHorasTarea
-
-            this.horasDiariasXDesarrollador= this.$store.state.horasDiariasXDesarrollador
-            this.diasHabilesXMes= this.$store.state.diasHabilesXMes
-        }
+        guardarDatos(){
+            // this.parametros = this.$store.state.parametros
+            this.$store.commit('editParams',this.parametros)
+            this.parametros = this.$store.state.parametros
+        },
     },
     created(){
-        this.llenadoBloque1();
+        this.parametros = this.$store.state.parametros
     }
 }
 </script>

@@ -3,6 +3,9 @@
     <h1>Parametros</h1>
     <div>
         <Parameter-app/>
+    </div>
+    <!-- <h1>Tabla</h1> -->
+    <div>
         <Parameter-table-app/>
     </div>
   </div>
