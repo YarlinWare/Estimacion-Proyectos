@@ -1,9 +1,11 @@
 <template>
     <div class="container">
-        <div>
-            <div>
-                <agregar-cargo-app @agregar="agregarCargo($event)"/>
-            </div>
+        <div class="row">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" @click="modalAgregar = true">
+                Agregar Cargo
+            </button>
+            <!-- <agregar-cargo-app @agregar="agregarCargo($event)"/> -->
         </div>
         <div class="row">
             <div class="col-12">
@@ -31,14 +33,10 @@
                         </th>
                         <th>
                             <div class="dataTable-btn-action">
-                                <!-- <button class="dataTable-icons btn btn-outline-success"
+                                <button class="dataTable-icons btn btn-outline-success"
                                         @click="editarElemento(idx)"
                                         type="button"
-                                ><i class="fa fa-pencil"></i></button> -->
-
-                                <editar-cargo-app   :elemento="desserts[idx]"
-                                                    @editar="editarCargo(idx, $event)"
-                                />
+                                ><i class="fa fa-pencil"></i></button>
 
                                 <button class="dataTable-icons btn btn-outline-danger"
                                         @click="eliminarElemento(idx)"
@@ -60,6 +58,26 @@
                 </table>
             </div>
         </div>
+        <modal-app v-model="modalAgregar" :width="'500px'">
+            <template slot="modaltitle">
+                <h2>Agregar nuevo cargo</h2>
+            </template>
+            <template slot="modalcontent">
+                <agregar-cargo-app @agregar="agregarCargo($event)"/>
+            </template>
+        </modal-app>
+
+        <modal-app v-model="modalEditar" :width="'500px'">
+            <template slot="modaltitle">
+                <h2>Editar cargo</h2>
+            </template>
+            <template slot="modalcontent">
+                <editar-cargo-app   v-if="modalEditar"
+                                    :elemento="elementoSeleccionado"
+                                    @editar="editarCargo($event)"
+                />
+            </template>
+        </modal-app>
     </div>
 </template>
 <script>
@@ -70,12 +88,11 @@ import Editar from './EditarCargo'
 export default {
     components:{
         'agregar-cargo-app': Agregar,
-        'editar-cargo-app':Editar,
+        'editar-cargo-app':Editar
     },
     data () {
         return {
             nuevoCargo:'',
-            modal:false,
             headers: [
                 {
                     text: '',
@@ -141,23 +158,35 @@ export default {
             // ],
             desserts:{},
             elemento:{},
-            totalTabla:Array(5).fill(0)
+            totalTabla:Array(5).fill(0),
+            modalEditar:false,
+            modalAgregar:false,
+            elementoSeleccionado: null,
+            posicionTemporal: 0
         }
     },
     methods:{
         agregarCargo(objeto){
             this.$store.commit('addDesserts',objeto)
             this.validarTotalTabla()
+            this.modalAgregar =false
         },
         eliminarElemento(id){
             console.log(`Se elimina elemento: ${this.desserts[id].actividad}.`)
             this.desserts.splice(id,1)
             this.validarTotalTabla()
         },
-        editarElemento(idx, objeto){
+        editarElemento(idx){
+            this.posicionTemporal = idx
+            this.elementoSeleccionado = this.desserts[idx]
+            this.modalEditar=true
+        },
+        editarCargo(objeto){
             // this.elemento = this.desserts[idx]
-            this.$store.commit('editDesserts', idx, objeto)
-            this.desserts[idx] = objeto
+            this.$store.commit('editDesserts', this.posicionTemporal, objeto)
+            this.desserts[this.posicionTemporal] = objeto
+            this.modalEditar = false
+            this.validarTotalTabla()
         },
         validarTotalTabla(){
             this.totalTabla= Array(5).fill(0)

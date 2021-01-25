@@ -9,7 +9,7 @@
         >
         <v-card class="fondo-curso-modal">
             <v-toolbar class="cerrar">
-                <slot name="modaltittle"></slot>
+                <slot name="modaltitle"></slot>
                 <v-spacer> </v-spacer>
                 <button v-if="mostrarCerrar" @click="$emit('click', false)"
                         class="hvr hvr-scale btn-cerrar">

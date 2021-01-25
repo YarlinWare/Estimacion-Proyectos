@@ -1,64 +1,73 @@
 <template>
     <div>
-        <v-layout row wrap justify-space-around>
-            <v-flex xs11 sm11 md5>
-                <div class="form-group ">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarModal">
+            Agregar Cargo
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agregarModalLabel">Agregar un nuevo campo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-6">
                         <label for="actividad">Actividad</label>
                         <input type="text"
                             v-model="actividad"
                             class="form-control" id="actividad"
                             />
-                </div>
-            </v-flex>
-            <v-flex xs11 sm11 md5>
-                    <div class="form-group ">
+                    </div>
+                    <div class="form-group col-6">
                         <label for="horasTarea">Horas Tarea</label>
                         <input type="number"
                             v-model="horasTarea"
                             class="form-control" id="horasTarea"
                             />
                     </div>
-            </v-flex>
-            <v-flex xs11 sm11 md5>
-                    <div class="form-group ">
+                    <div class="form-group col-6">
                         <label for="costoMesIngeniero">Costo mes ingeniero</label>
                         <input type="number"
                             v-model="costoMesIngeniero"
                             class="form-control" id="costoMesIngeniero"
                             />
                     </div>
-            </v-flex>
-            <v-flex xs11 sm11 md5>
-                    <div class="form-group ">
+                    <div class="form-group col-6">
                         <label for="valorMesIngeniero">Valor mes ingeniero</label>
                         <input type="number"
                             v-model="valorMesIngeniero"
                             class="form-control" id="valorMesIngeniero"
                             />
                     </div>
-            </v-flex>
-            <v-flex xs11 sm11 md5>
-                    <div class="form-group ">
+                    <div class="form-group col-6">
                         <label for="valorTarea">Valor Tarea</label>
                         <input type="number"
                             v-model="valorTarea"
                             class="form-control" id="valorTarea"
                             />
                     </div>
-            </v-flex>
-            <v-flex xs11 sm11 md5>
-                    <div class="form-group ">
+                    <div class="form-group col-6">
                         <label for="valorHoraIngeniero">Valor hora ingeniero</label>
                         <input type="number"
                             v-model="valorHoraIngeniero"
                             class="form-control" id="valorHoraIngeniero"
                             />
                     </div>
-            </v-flex>
-            <v-flex xs11 sm11 md5>
-                <button type="button" class="btn btn-primary" @click="guardarCambios()">Guardar</button>
-            </v-flex>
-        </v-layout>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="guardarCambios()">Guardar</button>
+            </div>
+            </div>
+        </div>
+        </div>
     </div>
 </template>
 <script>
@@ -100,8 +109,3 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
-    .form-control, label{
-        width: 100%;
-    }
-</style>
