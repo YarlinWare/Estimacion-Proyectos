@@ -60,7 +60,7 @@
                 <button type="button" class="btn btn-secondary" @click="modal=false">Cancelar</button>
             </v-flex> -->
             <v-flex xs5 sm5 md5>
-                <button type="button" class="btn btn-primary" @click="guardarCambios()">
+                <button type="button" class="btn btn-primary" @click="guardarCambios(),$emit('click', false)">
                     Guardar cambios
                 </button>
             </v-flex>
@@ -82,17 +82,14 @@ export default {
     },
     methods:{
         cargarValores(){
-            // this.objeto = this.elemento
             try {
                 this.objeto = this.elemento
             } catch (error) {
                 console.log('....')
             }
-            // this.modal=true
         },
         guardarCambios(){
             this.$emit('editar', this.objeto)
-            // this.modal=false
         }
     },
     mounted(){

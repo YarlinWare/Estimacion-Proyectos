@@ -24,19 +24,12 @@
                 <tbody>
                     <tr v-for="(dessert, idx) in desserts"
                         :key="`desserts-${idx}`"
-                        :class="{}"
                     >
-                        <th v-for="(value, key, i) in dessert"
-                            :key="`${value}-${key}`"
-                            :class="[
-                                    'dateTable-items',
-                                    {
-                                        'tableKey': i==0 || i==1,
-                                        'dateTable-items-title': i==1
-                                    }
-                            ]"
+                        <th v-for="(d, i, j) in dessert"
+                            :key="`${d}-${i}`"
+                            :class="[{'tableKey': j==0}, 'dateTable-items']"
                         >
-                            <span><b v-if="i>2">$</b> {{value}} </span>
+                            <span><b v-if="j>1">$</b> {{d}} </span>
                         </th>
                         <th>
                             <div class="dataTable-btn-action">
@@ -53,13 +46,12 @@
                         </th>
                     </tr>
                     <tr>
-                        <th class="tableKey dateTable-items"></th>
                         <th class="tableKey dateTable-items">Total</th>
                         <th class="dateTable-items"><span>{{totalTabla[0]}}</span></th>
                         <th class="dateTable-items"><span>$ {{totalTabla[1]}}</span></th>
                         <th class="dateTable-items"><span>$ {{totalTabla[2]}}</span></th>
                         <th class="dateTable-items"><span>$ {{totalTabla[3]}}</span></th>
-                        <th class="dateTable-items"><span>$ {{vhi}}</span></th>
+                        <th class="dateTable-items"><span>$ {{totalTabla[4]}}</span></th>
                         <th class="dateTable-items">
                             <div class="dataTable-btn-action">
                                 <button class="dataTable-icons btn disabled"
@@ -102,10 +94,8 @@
 </template>
 <script>
 /* eslint-disable */
-import Agregar from './AgregarCargo';
-import Editar from './EditarCargo';
-import axios from 'axios';
-import api from '../api';
+import Agregar from './AgregarCargo'
+import Editar from './EditarCargo'
 
 export default {
     components:{
@@ -115,67 +105,49 @@ export default {
     data () {
         return {
             nuevoCargo:'',
-            headers: {},
+            headers: [
+                { text: 'Actividad', value: 'actividad' },
+                { text: 'Horas tarea', value: 'horasTarea' },
+                { text: 'Costo mes ingeniero', value: 'costoMesIngeniero' },
+                { text: 'Valor mes ingeniero', value: 'valorMesIngeniero' },
+                { text: 'Valor Tarea', value: 'valorTarea' },
+                { text: 'Valor hora ingeniero', value: 'valorHoraIngeniero' },
+            ],
             desserts:{},
             elemento:{},
-            // Valor hora ingeniero:
-            vhi:0,
             totalTabla:Array(5).fill(0),
             modalEditar:false,
             modalAgregar:false,
             elementoSeleccionado: null,
-            posicionTemporal: 0,
-            baseURL:'http://localhost:3001'
+            posicionTemporal: 0
         }
     },
     methods:{
-        async agregarCargo(objeto) {
-            try {
-                await api.desserts.create({
-                    id:(this.desserts.length),
-                    actividad: objeto.actividad,
-                    horasTarea: objeto.horasTarea,
-                    costoMesIngeniero: objeto.costoMesIngeniero,
-                    valorMesIngeniero: objeto.valorMesIngeniero,
-                    valorTarea: objeto.valorTarea,
-                    valorHoraIngeniero: objeto.valorHoraIngeniero
-                })
-                // this.desserts = [... this.desserts, res.data]
-                this.modalAgregar =false
-                this.cargarData()
-                this.validarTotalTabla()
-            } catch (error) {
-                console.error(error)
-            }
+        agregarCargo(objeto){
+            this.$store.commit('addDesserts',objeto)
+            this.validarTotalTabla()
+            this.modalAgregar =false
         },
-        async eliminarElemento(id){
-            try {
-                await api.desserts.remove(id)
-                this.cargarData()
-            } catch (error) {
-                console.error(error)
-            }
+        eliminarElemento(id){
+            console.log(`Se elimina elemento: ${this.desserts[id].actividad}.`)
+            this.desserts.splice(id,1)
+            this.validarTotalTabla()
         },
         editarElemento(idx){
             this.posicionTemporal = idx
             this.elementoSeleccionado = this.desserts[idx]
             this.modalEditar=true
         },
-        async editarCargo(objeto){
+        editarCargo(objeto){
             // this.elemento = this.desserts[idx]
-            // this.$store.commit('editDesserts', this.posicionTemporal, objeto)
-            // this.desserts[this.posicionTemporal] = objeto
-            // this.modalEditar = false
-            // this.validarTotalTabla()
-            try {
-                await api.desserts.update(this.posicionTemporal, objeto)
-                this.modalEditar = false
-                this.cargarData()
-            } catch (error) {}
+            this.$store.commit('editDesserts', this.posicionTemporal, objeto)
+            this.desserts[this.posicionTemporal] = objeto
+            this.modalEditar = false
+            this.validarTotalTabla()
         },
         validarTotalTabla(){
             this.totalTabla= Array(5).fill(0)
-            // this.desserts = this.$store.state.desserts
+            this.desserts = this.$store.state.desserts
             // alert(JSON.stringify(this.desserts))
             this.desserts.map((el, idx) =>{
                 // Horas tarea
@@ -189,24 +161,11 @@ export default {
                 // Valor hora ingeniero
                 this.$set(this.totalTabla, 4, this.totalTabla[4]+Number(el.valorHoraIngeniero))
             })
-            this.desserts.slice(Object.keys('id'))
-            this.vhi = (this.totalTabla[3]/this.totalTabla[0]).toFixed(2)
-        },
-        async cargarData(){
-            try {
-                const response = await axios.get(`${this.baseURL}/desserts`)
-                const headers_titles = await axios.get(`${this.baseURL}/headers`)
-                this.desserts = response.data;
-                this.headers = headers_titles.data;
-                this.validarTotalTabla()
-            } catch(e) {
-                console.error(e)
-            }
         }
     },
-    mounted() {
-        this.cargarData()
-    },
+    mounted(){
+        this.validarTotalTabla()
+    }
 }
 </script>
 
@@ -247,11 +206,6 @@ export default {
     text-align: center;
     display: flex;
     justify-content: center;
-}
-.dateTable-items-title span{
-    text-align: left;
-    display: flex;
-    justify-content: left;
 }
 .dataTable th {
   text-align: left;

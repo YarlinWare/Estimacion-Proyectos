@@ -56,7 +56,7 @@
                     </div>
             </v-flex>
             <v-flex xs11 sm11 md5>
-                <button type="button" class="btn btn-primary" @click="guardarCambios()">Guardar</button>
+                <button type="button" class="btn btn-primary" @click="guardarCambios(),$emit('click', false)">Guardar</button>
             </v-flex>
         </v-layout>
     </div>
@@ -82,7 +82,7 @@ export default {
     methods:{
         guardarCambios(){
             this.objeto = {
-                    actividad: Number(this.actividad),
+                    actividad: this.actividad,
                     horasTarea: Number(this.horasTarea),
                     costoMesIngeniero: Number(this.costoMesIngeniero),
                     valorMesIngeniero: Number(this.valorMesIngeniero),

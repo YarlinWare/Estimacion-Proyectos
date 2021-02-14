@@ -52,6 +52,42 @@ const api = {
       });
     },
   },
+
+
+  // Sección de módulos
+  modulos: {
+    list() {
+        // return []; // Cuando no hay elementos
+        // throw new Error('Not found') // Error
+        // throw new Error('500: Server Error') // Error server
+        return callApi('/modulos');// Cuando hay elementos
+    },
+    create(modulos) {
+      // throw new Error('500: Server Error') // Error server
+      return callApi(`/modulos`, {
+        method: 'POST',
+        body: JSON.stringify(modulos),
+      });
+    },
+    read(modulotId) {
+      return callApi(`/modulos/${modulotId}`);
+    },
+    update(modulotId, updates) {
+      return callApi(`/modulos/${modulotId}`, {
+        method: 'PUT',
+        body: JSON.stringify(updates),
+      });
+    },
+    // Lo hubiera llamado `delete`, pero `delete` es un keyword en JavaScript asi que no es buena idea :P
+    remove(modulotId) {
+      return callApi(`/modulos/${modulotId}`, {
+        method: 'DELETE',
+      });
+    },
+  },
+
+
+
 };
 
 export default api;
