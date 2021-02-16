@@ -19,7 +19,11 @@ export default {
   data(){
     return{
       baseURL:'http://localhost:3001',
-      listamodulos:{}
+      listamodulos:{},
+      total:0,
+      totalHoras:0,
+      totalDias:0,
+      TotalMeses:0
     }
   },
   methods:{

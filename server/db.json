@@ -87,96 +87,88 @@
       "valorHoraIngeniero": 39062.5
     }
   ],
-  "parametros":{
-    "baja":1,
-    "media":2,
-    "alta":4,
-    "muyAlta":6,
-    "factorNomina":2.5,
-    "totalHorasTarea":9,
-    "horasDiariasXDesarrollador":6,
-    "diasHabilesXMes":20
+  "parametros": {
+    "baja": 1,
+    "media": 2,
+    "alta": 4,
+    "muyAlta": 6,
+    "factorNomina": 2.5,
+    "totalHorasTarea": 9,
+    "horasDiariasXDesarrollador": 6,
+    "diasHabilesXMes": 20
   },
-  "modulos":[
+  "modulos": [
     {
-      "modulo":"Cronometro",
-      "elemento":[
+      "modulo": "Cronometro",
+      "elemento": [
         {
-          "funcion":"Avanzar",
-          "num_campos":7,
-          "objetos":5,
-          "complejidad":"alta",
-          "acciones":1,
-          "horas":4,
-          "costo":274306
+          "funcion": "Avanzar",
+          "num_campos": 7,
+          "objetos": 5,
+          "complejidad": "alta",
+          "acciones": 1,
+          "horas": 4
         },
         {
-          "funcion":"Guardar memoria",
-          "num_campos":4,
-          "objetos":4,
-          "complejidad":"alta",
-          "acciones":1,
-          "horas":4,
-          "costo":274306
+          "funcion": "Guardar memoria",
+          "num_campos": 4,
+          "objetos": 4,
+          "complejidad": "alta",
+          "acciones": 1,
+          "horas": 4
         },
         {
-          "funcion":"Reiniciar",
-          "num_campos":4,
-          "objetos":4,
-          "complejidad":"alta",
-          "acciones":1,
-          "horas":4,
-          "costo":274306
+          "funcion": "Reiniciar",
+          "num_campos": 4,
+          "objetos": 4,
+          "complejidad": "alta",
+          "acciones": 1,
+          "horas": 4
         },
         {
-          "funcion":"Borrar",
-          "num_campos":1,
-          "objetos":1,
-          "complejidad":"baja",
-          "acciones":1,
-          "horas":1,
-          "costo":68576
+          "funcion": "Borrar",
+          "num_campos": 1,
+          "objetos": 1,
+          "complejidad": "baja",
+          "acciones": 1,
+          "horas": 1
         },
         {
-          "funcion":"Pausar",
-          "num_campos":1,
-          "objetos":1,
-          "complejidad":"baja",
-          "acciones":1,
-          "horas":1,
-          "costo":68576
+          "funcion": "Pausar",
+          "num_campos": 1,
+          "objetos": 1,
+          "complejidad": "baja",
+          "acciones": 1,
+          "horas": 1
         }
       ]
     },
     {
-      "modulo":"Temporizador",
-      "elemento":[
+      "modulo": "Temporizador",
+      "elemento": [
         {
-          "funcion":"Establecer tiempo inicial",
-          "num_campos":3,
-          "objetos":4,
-          "complejidad":"alta",
-          "acciones":1,
-          "horas":4,
-          "costo":274306
+          "funcion": "Establecer tiempo inicial",
+          "num_campos": 3,
+          "objetos": 4,
+          "complejidad": "alta",
+          "acciones": 1,
+          "horas": 4
         },
         {
-          "funcion":"Retroceder",
-          "num_campos":1,
-          "objetos":1,
-          "complejidad":"baja",
-          "acciones":1,
-          "horas":1,
-          "costo":68576
+          "funcion": "Retroceder",
+          "num_campos": 1,
+          "objetos": 1,
+          "complejidad": "baja",
+          "acciones": 1,
+          "horas": 1
         },
         {
-          "funcion":"Alerta de tiempo",
-          "num_campos":1,
-          "objetos":2,
-          "complejidad":"media",
-          "acciones":1,
-          "horas":2,
-          "costo":137153
+          "funcion": "Alerta de tiempo",
+          "num_campos": 1,
+          "objetos": 2,
+          "complejidad": "media",
+          "acciones": 1,
+          "horas": 2
         }
       ]
     }
