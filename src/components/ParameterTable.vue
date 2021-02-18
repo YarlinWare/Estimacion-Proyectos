@@ -191,6 +191,7 @@ export default {
             })
             this.desserts.slice(Object.keys('id'))
             this.vhi = (this.totalTabla[3]/this.totalTabla[0]).toFixed(2)
+            this.$store.commit('valorTotalParametros',this.vhi)
         },
         async cargarData(){
             try {
